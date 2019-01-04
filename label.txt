@@ -1,0 +1,25 @@
+ protected void Page_Load(object sender, EventArgs e)
+        {
+            PopulateSchedule();
+            lblAutoId.Text =GetCount().ToString();
+        }
+        
+        public int GetCount()
+        {
+            cmd = new SqlCommand("Select * from [Mayuri_164300].[ConsultancySchedule]", conn);
+            conn.Open();
+            dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    records++;
+                }
+            }
+
+            conn.Close();
+            id = (records + 1000);
+            return id ;
+           
+        }
